@@ -54,7 +54,7 @@ const PSNConnection = ({ onConnect, onDisconnect, isConnected, profile }) => {
           </div>
           <button
             onClick={handleDisconnect}
-            className="text-sm bg-white/20 hover:bg-white/30 px-3 py-1 rounded-md transition-colors"
+            className="text-sm bg-white/20 hover:bg-white/30 px-3 py-1 rounded-md transition-colors transition-transform transform hover:scale-105"
           >
             Disconnect
           </button>
@@ -74,19 +74,19 @@ const PSNConnection = ({ onConnect, onDisconnect, isConnected, profile }) => {
   }
 
   return (
-    <div className="bg-gray-800 rounded-lg p-4">
+    <div className="bg-surface rounded-lg p-4">
       <div className="flex items-center space-x-2 mb-3">
-        <WifiOff className="w-5 h-5 text-gray-400" />
-        <h3 className="font-medium text-white">Connect to PlayStation Network</h3>
+        <WifiOff className="w-5 h-5 text-text-secondary" />
+        <h3 className="font-medium text-text-primary">Connect to PlayStation Network</h3>
       </div>
 
-      <p className="text-sm text-gray-400 mb-4">
+      <p className="text-sm text-text-secondary mb-4">
         Connect your PSN account to sync your real trophy progress and library.
       </p>
 
       <div className="space-y-3">
         <div>
-          <label className="block text-sm font-medium text-gray-300 mb-2">
+          <label className="block text-sm font-medium text-text-secondary mb-2">
             NPSSO Token
           </label>
           <input
@@ -94,9 +94,9 @@ const PSNConnection = ({ onConnect, onDisconnect, isConnected, profile }) => {
             placeholder="Enter your NPSSO token..."
             value={npsso}
             onChange={(e) => setNpsso(e.target.value)}
-            className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+            className="w-full px-3 py-2 bg-background border border-secondary/20 rounded-md text-text-primary placeholder-text-secondary focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
           />
-          <p className="text-xs text-gray-500 mt-1">
+          <p className="text-xs text-text-secondary/50 mt-1">
             Get your NPSSO from PlayStation's website cookies (advanced users only)
           </p>
         </div>
@@ -110,7 +110,7 @@ const PSNConnection = ({ onConnect, onDisconnect, isConnected, profile }) => {
         <button
           onClick={handleConnect}
           disabled={isConnecting}
-          className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white px-4 py-2 rounded-md transition-colors flex items-center justify-center space-x-2"
+          className="w-full bg-primary hover:bg-primary/90 disabled:bg-secondary disabled:cursor-not-allowed text-white px-4 py-2 rounded-md transition-colors flex items-center justify-center space-x-2 transition-transform transform hover:scale-105"
         >
           {isConnecting ? (
             <>
@@ -134,7 +134,7 @@ const TrophyIcon = ({ type, size = 'w-5 h-5' }) => {
 
   switch (type) {
     case 'platinum':
-      return <Award {...iconProps} className={`${size} text-cyan-400`} />;
+      return <Award {...iconProps} className={`${size} text-primary`} />;
     case 'gold':
       return <Trophy {...iconProps} className={`${size} text-yellow-400`} />;
     case 'silver':
@@ -147,19 +147,19 @@ const TrophyIcon = ({ type, size = 'w-5 h-5' }) => {
 };
 
 const GameCard = ({ game, onAddToLibrary, isInLibrary }) => (
-  <div className="bg-gray-800 rounded-lg p-4 hover:bg-gradient-to-br from-gray-700 to-gray-800 transition-all duration-300 shadow-lg transform hover:scale-105">
+  <div className="bg-surface rounded-lg p-4 hover:bg-gradient-to-br from-surface to-background transition-all duration-300 shadow-lg transform hover:scale-105">
     <div className="flex items-center justify-between mb-3">
       <div className="flex items-center space-x-3">
-        <span className="text-2xl">{game.image}</span>
+        <span className="text-2xl" role="img" aria-label={game.title}>{game.image}</span>
         <div>
-          <h3 className="font-bold text-white text-lg">{game.title}</h3>
-          <p className="text-base text-gray-400">{game.platform}</p>
+          <h3 className="font-bold text-text-primary text-lg">{game.title}</h3>
+          <p className="text-base text-text-secondary">{game.platform}</p>
         </div>
       </div>
       {!isInLibrary && (
         <button
           onClick={() => onAddToLibrary(game)}
-          className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded-md flex items-center space-x-1 text-sm transition-colors"
+          className="bg-primary hover:bg-primary/90 text-white px-3 py-1 rounded-md flex items-center space-x-1 text-sm transition-colors transition-transform transform hover:scale-105"
         >
           <Plus className="w-4 h-4" />
           <span>Add</span>
@@ -167,7 +167,7 @@ const GameCard = ({ game, onAddToLibrary, isInLibrary }) => (
       )}
     </div>
 
-    <div className="flex items-center space-x-4 text-sm text-gray-400">
+    <div className="flex items-center space-x-4 text-sm text-text-secondary">
       <div className="flex items-center space-x-1">
         <TrophyIcon type="platinum" size="w-4 h-4" />
         <span>1</span>
@@ -189,13 +189,13 @@ const GameCard = ({ game, onAddToLibrary, isInLibrary }) => (
 );
 
 const TrophyItem = ({ trophy, type, onToggle, isEarned }) => (
-  <div className="flex items-start space-x-3 p-3 bg-gray-800 rounded-lg hover:bg-gradient-to-br from-gray-700 to-gray-800 transition-all duration-300">
+  <div className="flex items-start space-x-3 p-3 bg-surface rounded-lg hover:bg-gradient-to-br from-surface to-background transition-all duration-300">
     <button
       onClick={onToggle}
       className={`mt-1 w-5 h-5 rounded border-2 flex items-center justify-center transition-colors ${
         isEarned
           ? 'bg-green-600 border-green-600 text-white'
-          : 'border-gray-600 hover:border-gray-400'
+          : 'border-secondary/20 hover:border-primary'
       }`}
     >
       {isEarned && <Check className="w-3 h-3" />}
@@ -204,11 +204,11 @@ const TrophyItem = ({ trophy, type, onToggle, isEarned }) => (
     <div className="flex-1">
       <div className="flex items-center space-x-2 mb-1">
         <TrophyIcon type={type} size="w-4 h-4" />
-        <h4 className={`font-semibold ${isEarned ? 'text-green-400' : 'text-white'}`}>
+        <h4 className={`font-semibold ${isEarned ? 'text-green-400' : 'text-text-primary'}`}>
           {trophy.name}
         </h4>
       </div>
-      <p className="text-sm text-gray-400">{trophy.description}</p>
+      <p className="text-sm text-text-secondary">{trophy.description}</p>
     </div>
   </div>
 );
@@ -237,18 +237,18 @@ const LibraryGame = ({ game, onTrophyToggle, autoCompletePlatinum }) => {
   }, [nonPlatinumEarned, allNonPlatinumEarned, game.trophies.platinum.earned, autoCompletePlatinum, onTrophyToggle, game.id]);
 
   return (
-    <div className="bg-gray-800 rounded-lg p-4 border border-gray-700 shadow-lg">
+    <div className="bg-surface rounded-lg p-4 border border-secondary/20 shadow-lg">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center space-x-3">
-          <span className="text-2xl">{game.image}</span>
+          <span className="text-2xl" role="img" aria-label={game.title}>{game.image}</span>
           <div>
-            <h3 className="font-bold text-white text-lg">{game.title}</h3>
-            <p className="text-base text-gray-400">{game.platform}</p>
+            <h3 className="font-bold text-text-primary text-lg">{game.title}</h3>
+            <p className="text-base text-text-secondary">{game.platform}</p>
           </div>
         </div>
         <button
           onClick={() => setIsExpanded(!isExpanded)}
-          className="text-gray-400 hover:text-white transition-colors"
+          className="text-text-secondary hover:text-text-primary transition-colors"
         >
           {isExpanded ? <ChevronUp /> : <ChevronDown />}
         </button>
@@ -257,12 +257,12 @@ const LibraryGame = ({ game, onTrophyToggle, autoCompletePlatinum }) => {
       {/* Progress Bar */}
       <div className="mb-4">
         <div className="flex justify-between items-center mb-2">
-          <span className="text-sm text-gray-400">Progress</span>
-          <span className="text-sm font-medium text-white">{earnedTrophies}/{totalTrophies} ({progressPercent}%)</span>
+          <span className="text-sm text-text-secondary">Progress</span>
+          <span className="text-sm font-medium text-text-primary">{earnedTrophies}/{totalTrophies} ({progressPercent}%)</span>
         </div>
-        <div className="w-full bg-gray-700 rounded-full h-2">
+        <div className="w-full bg-background rounded-full h-2">
           <div
-            className="bg-blue-600 h-2 rounded-full transition-all duration-300"
+            className="bg-primary h-2 rounded-full transition-all duration-300"
             style={{ width: `${progressPercent}%` }}
           ></div>
         </div>
@@ -270,19 +270,19 @@ const LibraryGame = ({ game, onTrophyToggle, autoCompletePlatinum }) => {
 
       {/* Trophy Summary */}
       <div className="flex items-center space-x-4 mb-4 text-sm">
-        <div className={`flex items-center space-x-1 ${game.trophies.platinum.earned ? 'text-green-400' : 'text-gray-400'}`}>
+        <div className={`flex items-center space-x-1 ${game.trophies.platinum.earned ? 'text-green-400' : 'text-text-secondary'}`}>
           <TrophyIcon type="platinum" size="w-4 h-4" />
           <span>{game.trophies.platinum.earned ? 1 : 0}/1</span>
         </div>
-        <div className="flex items-center space-x-1 text-gray-400">
+        <div className="flex items-center space-x-1 text-text-secondary">
           <TrophyIcon type="gold" size="w-4 h-4" />
           <span>{game.trophies.gold.filter(t => t.earned).length}/{game.trophies.gold.length}</span>
         </div>
-        <div className="flex items-center space-x-1 text-gray-400">
+        <div className="flex items-center space-x-1 text-text-secondary">
           <TrophyIcon type="silver" size="w-4 h-4" />
           <span>{game.trophies.silver.filter(t => t.earned).length}/{game.trophies.silver.length}</span>
         </div>
-        <div className="flex items-center space-x-1 text-gray-400">
+        <div className="flex items-center space-x-1 text-text-secondary">
           <TrophyIcon type="bronze" size="w-4 h-4" />
           <span>{game.trophies.bronze.filter(t => t.earned).length}/{game.trophies.bronze.length}</span>
         </div>
@@ -449,13 +449,12 @@ const PlatinumTracker = () => {
   const totalGames = library.length;
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
+    <div className="min-h-screen bg-background text-text-primary font-sans">
       <div className="container mx-auto p-4">
-        {/* Header */}
-        <header className="bg-gray-800 border-b border-gray-700 px-6 py-4 rounded-t-lg mb-4">
+        <header className="bg-surface border-b border-secondary/20 px-6 py-4 rounded-t-lg mb-4">
           <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between">
             <div className="flex items-center space-x-3">
-              <Trophy className="w-10 h-10 text-cyan-400" />
+              <Trophy className="w-10 h-10 text-primary" />
               <h1 className="text-3xl font-bold">Platinum Tracker</h1>
             </div>
             <div className="flex items-center space-x-4 text-sm">
@@ -463,167 +462,147 @@ const PlatinumTracker = () => {
                 <TrophyIcon type="platinum" />
                 <span>{totalPlatinums} Platinums</span>
               </div>
-              <div className="text-gray-400">
+              <div className="text-text-secondary">
                 {totalGames} Games
               </div>
             </div>
           </div>
         </header>
 
-        {/* Navigation */}
-        <div className="bg-gray-800 border-b border-gray-700 px-6 py-2 mb-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="flex justify-between items-center">
-              <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-6">
+        <div className="grid grid-cols-12 gap-6">
+          <aside className="col-span-12 sm:col-span-3">
+            <nav className="bg-surface rounded-lg p-4">
+              <div className="flex flex-col space-y-2">
                 {Object.values(TABS).map(tab => (
                   <button
                     key={tab}
                     onClick={() => setActiveTab(tab)}
-                    className={`px-4 py-2 rounded-md capitalize transition-colors ${
+                    className={`px-4 py-2 rounded-md capitalize transition-colors text-left transition-transform transform hover:scale-105 ${
                       activeTab === tab
-                        ? 'bg-blue-600 text-white'
-                        : 'text-gray-400 hover:text-white hover:bg-gray-700'
+                        ? 'bg-primary text-white'
+                        : 'text-text-secondary hover:text-text-primary hover:bg-secondary/20'
                     }`}
                   >
                     {tab === 'psn' ? 'PlayStation' : tab}
                   </button>
                 ))}
               </div>
-
-              {isConnectedToPSN && (
-                <button
-                  onClick={syncTrophyData}
-                  disabled={isSyncing}
-                  className="flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-600 text-white px-3 py-1 rounded-md text-sm transition-colors"
-                >
-                  {isSyncing ? (
-                    <>
-                      <div className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin"></div>
-                      <span>Syncing...</span>
-                    </>
-                  ) : (
-                    <>
-                      <Download className="w-4 h-4" />
-                      <span>Sync PSN</span>
-                    </>
-                  )}
-                </button>
-              )}
-            </div>
-          </div>
-        </div>
-
-        <div className="max-w-6xl mx-auto px-6 py-6 bg-gray-800 rounded-b-lg">
-          {/* Browse Games */}
-          {activeTab === TABS.BROWSE && (
-            <div>
-              <div className="mb-6">
-                <h2 className="text-2xl font-bold mb-4 flex items-center"><Gamepad2 className="w-6 h-6 mr-2" /> Browse PlayStation Games</h2>
-                <div className="relative">
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                  <input
-                    type="text"
-                    placeholder="Search for games..."
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    className="w-full pl-10 pr-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
-                  />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {filteredGames.map(game => (
-                  <GameCard
-                    key={game.id}
-                    game={game}
-                    onAddToLibrary={addToLibrary}
-                    isInLibrary={library.some(g => g.id === game.id)}
-                  />
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* Library */}
-          {activeTab === TABS.LIBRARY && (
-            <div>
-              <h2 className="text-2xl font-bold mb-6 flex items-center"><Library className="w-6 h-6 mr-2" /> My Trophy Library</h2>
-              {library.length === 0 ? (
-                <div className="text-center py-12">
-                  <PackageOpen className="w-16 h-16 text-gray-600 mx-auto mb-4" />
-                  <p className="text-gray-400 text-lg mb-4">Your trophy library is empty</p>
-                  <button
-                    onClick={() => setActiveTab(TABS.BROWSE)}
-                    className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition-colors"
-                  >
-                    Browse Games
-                  </button>
-                </div>
-              ) : (
-                <div className="space-y-4">
-                  {library.map(game => (
-                    <LibraryGame
-                      key={game.id}
-                      game={game}
-                      onTrophyToggle={toggleTrophy}
-                      autoCompletePlatinum={autoCompletePlatinum}
-                    />
-                  ))}
-                </div>
-              )}
-            </div>
-          )}
-
-          {/* PlayStation Tab */}
-          {activeTab === TABS.PSN && (
-            <div>
-              <h2 className="text-2xl font-bold mb-6 flex items-center"><Network className="w-6 h-6 mr-2" /> PlayStation Network Integration</h2>
-
-              <div className="space-y-6">
-                <PSNConnection
-                  onConnect={connectToPSN}
-                  onDisconnect={disconnectFromPSN}
-                  isConnected={isConnectedToPSN}
-                  profile={psnProfile}
-                />
-
-                {isConnectedToPSN && <PsnProfile profile={psnProfile} />}
-
-                <PsnTrophyList trophyTitles={psnTrophyTitles} />
-
-                <PsnNpssoInstructions />
-              </div>
-            </div>
-          )}
-
-          {/* Settings */}
-          {activeTab === TABS.SETTINGS && (
-            <div>
-              <h2 className="text-2xl font-bold mb-6 flex items-center"><Settings className="w-6 h-6 mr-2" /> Settings</h2>
-              <div className="bg-gray-800 rounded-lg p-6 space-y-4">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h3 className="font-semibold text-white">Auto-complete Platinum</h3>
-                    <p className="text-sm text-gray-400 mt-1">
-                      Automatically mark Platinum trophy as earned when all other trophies are completed
-                    </p>
+            </nav>
+          </aside>
+          <main className="col-span-12 sm:col-span-9">
+            <div className="bg-surface rounded-lg p-6">
+              {/* Browse Games */}
+              {activeTab === TABS.BROWSE && (
+                <div>
+                  <div className="mb-6">
+                    <h2 className="text-2xl font-bold mb-4 flex items-center"><Gamepad2 className="w-6 h-6 mr-2" /> Browse PlayStation Games</h2>
+                    <div className="relative">
+                      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-text-secondary w-5 h-5" />
+                      <input
+                        type="text"
+                        placeholder="Search for games..."
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        className="w-full pl-10 pr-4 py-2 bg-background border border-secondary/20 rounded-lg text-text-primary placeholder-text-secondary focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                      />
+                    </div>
                   </div>
-                  <button
-                    onClick={() => setAutoCompletePlatinum(!autoCompletePlatinum)}
-                    className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-                      autoCompletePlatinum ? 'bg-blue-600' : 'bg-gray-600'
-                    }`}
-                  >
-                    <span
-                      className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                        autoCompletePlatinum ? 'translate-x-6' : 'translate-x-1'
-                      }`}
-                    />
-                  </button>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {filteredGames.map(game => (
+                      <GameCard
+                        key={game.id}
+                        game={game}
+                        onAddToLibrary={addToLibrary}
+                        isInLibrary={library.some(g => g.id === game.id)}
+                      />
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
+
+              {/* Library */}
+              {activeTab === TABS.LIBRARY && (
+                <div>
+                  <h2 className="text-2xl font-bold mb-6 flex items-center"><Library className="w-6 h-6 mr-2" /> My Trophy Library</h2>
+                  {library.length === 0 ? (
+                    <div className="text-center py-12">
+                      <PackageOpen className="w-16 h-16 text-secondary mx-auto mb-4" />
+                      <p className="text-text-secondary text-lg mb-4">Your trophy library is empty</p>
+                      <button
+                        onClick={() => setActiveTab(TABS.BROWSE)}
+                        className="bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded-lg transition-colors transition-transform transform hover:scale-105"
+                      >
+                        Browse Games
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="space-y-4">
+                      {library.map(game => (
+                        <LibraryGame
+                          key={game.id}
+                          game={game}
+                          onTrophyToggle={toggleTrophy}
+                          autoCompletePlatinum={autoCompletePlatinum}
+                        />
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* PlayStation Tab */}
+              {activeTab === TABS.PSN && (
+                <div>
+                  <h2 className="text-2xl font-bold mb-6 flex items-center"><Network className="w-6 h-6 mr-2" /> PlayStation Network Integration</h2>
+
+                  <div className="space-y-6">
+                    <PSNConnection
+                      onConnect={connectToPSN}
+                      onDisconnect={disconnectFromPSN}
+                      isConnected={isConnectedToPSN}
+                      profile={psnProfile}
+                    />
+
+                    {isConnectedToPSN && <PsnProfile profile={psnProfile} />}
+
+                    <PsnTrophyList trophyTitles={psnTrophyTitles} />
+
+                    <PsnNpssoInstructions />
+                  </div>
+                </div>
+              )}
+
+              {/* Settings */}
+              {activeTab === TABS.SETTINGS && (
+                <div>
+                  <h2 className="text-2xl font-bold mb-6 flex items-center"><Settings className="w-6 h-6 mr-2" /> Settings</h2>
+                  <div className="bg-surface rounded-lg p-6 space-y-4">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <h3 className="font-semibold text-text-primary">Auto-complete Platinum</h3>
+                        <p className="text-sm text-text-secondary mt-1">
+                          Automatically mark Platinum trophy as earned when all other trophies are completed
+                        </p>
+                      </div>
+                      <button
+                        onClick={() => setAutoCompletePlatinum(!autoCompletePlatinum)}
+                        className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
+                          autoCompletePlatinum ? 'bg-primary' : 'bg-secondary'
+                        }`}
+                      >
+                        <span
+                          className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                            autoCompletePlatinum ? 'translate-x-6' : 'translate-x-1'
+                          }`}
+                        />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
-          )}
+          </main>
         </div>
       </div>
     </div>
