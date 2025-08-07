@@ -1,0 +1,18 @@
+{
+  "name": "platinum-tracker",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "lucide-react": "^0.536.0",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "serve": "^14.2.4"
+  },
+  "scripts": {
+    "start": "npm run build && serve -s public",
+    "build": "esbuild src/index.js --bundle --outfile=public/bundle.js --loader:.js=jsx --loader:.jsx=jsx"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.8"
+  }
+}
