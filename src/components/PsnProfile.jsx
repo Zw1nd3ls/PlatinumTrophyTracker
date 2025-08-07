@@ -6,7 +6,7 @@ const PsnProfile = ({ profile }) => {
   }
 
   return (
-    <div className="bg-gray-800 rounded-lg p-6">
+    <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg p-6">
       <h3 className="font-semibold text-white mb-4">Your PlayStation Profile</h3>
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">

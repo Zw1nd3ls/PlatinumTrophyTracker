@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Search, Trophy, Star, Award, Plus, Check, ChevronDown, ChevronUp, Download, User, Wifi, WifiOff } from 'lucide-react';
+import { Search, Trophy, Star, Award, Plus, Check, ChevronDown, ChevronUp, Download, User, Wifi, WifiOff, Gamepad2, Library, Network, Settings, PackageOpen } from 'lucide-react';
 import { PSNService } from '../api/psnService.js';
 import { mockGames } from '../data/mockGames.js';
 import PsnProfile from './PsnProfile.jsx';
@@ -147,13 +147,13 @@ const TrophyIcon = ({ type, size = 'w-5 h-5' }) => {
 };
 
 const GameCard = ({ game, onAddToLibrary, isInLibrary }) => (
-  <div className="bg-gray-800 rounded-lg p-4 hover:bg-gray-750 transition-colors shadow-lg transform hover:scale-105">
+  <div className="bg-gray-800 rounded-lg p-4 hover:bg-gradient-to-br from-gray-700 to-gray-800 transition-all duration-300 shadow-lg transform hover:scale-105">
     <div className="flex items-center justify-between mb-3">
       <div className="flex items-center space-x-3">
         <span className="text-2xl">{game.image}</span>
         <div>
-          <h3 className="font-semibold text-white">{game.title}</h3>
-          <p className="text-sm text-gray-400">{game.platform}</p>
+          <h3 className="font-bold text-white text-lg">{game.title}</h3>
+          <p className="text-base text-gray-400">{game.platform}</p>
         </div>
       </div>
       {!isInLibrary && (
@@ -189,7 +189,7 @@ const GameCard = ({ game, onAddToLibrary, isInLibrary }) => (
 );
 
 const TrophyItem = ({ trophy, type, onToggle, isEarned }) => (
-  <div className="flex items-start space-x-3 p-3 bg-gray-800 rounded-lg hover:bg-gray-750 transition-colors">
+  <div className="flex items-start space-x-3 p-3 bg-gray-800 rounded-lg hover:bg-gradient-to-br from-gray-700 to-gray-800 transition-all duration-300">
     <button
       onClick={onToggle}
       className={`mt-1 w-5 h-5 rounded border-2 flex items-center justify-center transition-colors ${
@@ -204,7 +204,7 @@ const TrophyItem = ({ trophy, type, onToggle, isEarned }) => (
     <div className="flex-1">
       <div className="flex items-center space-x-2 mb-1">
         <TrophyIcon type={type} size="w-4 h-4" />
-        <h4 className={`font-medium ${isEarned ? 'text-green-400' : 'text-white'}`}>
+        <h4 className={`font-semibold ${isEarned ? 'text-green-400' : 'text-white'}`}>
           {trophy.name}
         </h4>
       </div>
@@ -242,8 +242,8 @@ const LibraryGame = ({ game, onTrophyToggle, autoCompletePlatinum }) => {
         <div className="flex items-center space-x-3">
           <span className="text-2xl">{game.image}</span>
           <div>
-            <h3 className="font-semibold text-white">{game.title}</h3>
-            <p className="text-sm text-gray-400">{game.platform}</p>
+            <h3 className="font-bold text-white text-lg">{game.title}</h3>
+            <p className="text-base text-gray-400">{game.platform}</p>
           </div>
         </div>
         <button
@@ -452,11 +452,11 @@ const PlatinumTracker = () => {
     <div className="min-h-screen bg-gray-900 text-white">
       <div className="container mx-auto p-4">
         {/* Header */}
-        <header className="bg-gray-800 border-b border-gray-700 px-6 py-4 rounded-t-lg">
+        <header className="bg-gray-800 border-b border-gray-700 px-6 py-4 rounded-t-lg mb-4">
           <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between">
             <div className="flex items-center space-x-3">
-              <Award className="w-8 h-8 text-cyan-400" />
-              <h1 className="text-2xl font-bold">Platinum Tracker</h1>
+              <Trophy className="w-10 h-10 text-cyan-400" />
+              <h1 className="text-3xl font-bold">Platinum Tracker</h1>
             </div>
             <div className="flex items-center space-x-4 text-sm">
               <div className="flex items-center space-x-2">
@@ -471,7 +471,7 @@ const PlatinumTracker = () => {
         </header>
 
         {/* Navigation */}
-        <div className="bg-gray-800 border-b border-gray-700 px-6 py-2">
+        <div className="bg-gray-800 border-b border-gray-700 px-6 py-2 mb-4">
           <div className="max-w-6xl mx-auto">
             <div className="flex justify-between items-center">
               <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-6">
@@ -518,7 +518,7 @@ const PlatinumTracker = () => {
           {activeTab === TABS.BROWSE && (
             <div>
               <div className="mb-6">
-                <h2 className="text-xl font-semibold mb-4">Browse PlayStation Games</h2>
+                <h2 className="text-2xl font-bold mb-4 flex items-center"><Gamepad2 className="w-6 h-6 mr-2" /> Browse PlayStation Games</h2>
                 <div className="relative">
                   <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
                   <input
@@ -531,7 +531,7 @@ const PlatinumTracker = () => {
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {filteredGames.map(game => (
                   <GameCard
                     key={game.id}
@@ -547,10 +547,10 @@ const PlatinumTracker = () => {
           {/* Library */}
           {activeTab === TABS.LIBRARY && (
             <div>
-              <h2 className="text-xl font-semibold mb-6">My Trophy Library</h2>
+              <h2 className="text-2xl font-bold mb-6 flex items-center"><Library className="w-6 h-6 mr-2" /> My Trophy Library</h2>
               {library.length === 0 ? (
                 <div className="text-center py-12">
-                  <Award className="w-16 h-16 text-gray-600 mx-auto mb-4" />
+                  <PackageOpen className="w-16 h-16 text-gray-600 mx-auto mb-4" />
                   <p className="text-gray-400 text-lg mb-4">Your trophy library is empty</p>
                   <button
                     onClick={() => setActiveTab(TABS.BROWSE)}
@@ -577,7 +577,7 @@ const PlatinumTracker = () => {
           {/* PlayStation Tab */}
           {activeTab === TABS.PSN && (
             <div>
-              <h2 className="text-xl font-semibold mb-6">PlayStation Network Integration</h2>
+              <h2 className="text-2xl font-bold mb-6 flex items-center"><Network className="w-6 h-6 mr-2" /> PlayStation Network Integration</h2>
 
               <div className="space-y-6">
                 <PSNConnection
@@ -599,11 +599,11 @@ const PlatinumTracker = () => {
           {/* Settings */}
           {activeTab === TABS.SETTINGS && (
             <div>
-              <h2 className="text-xl font-semibold mb-6">Settings</h2>
+              <h2 className="text-2xl font-bold mb-6 flex items-center"><Settings className="w-6 h-6 mr-2" /> Settings</h2>
               <div className="bg-gray-800 rounded-lg p-6 space-y-4">
                 <div className="flex items-center justify-between">
                   <div>
-                    <h3 className="font-medium text-white">Auto-complete Platinum</h3>
+                    <h3 className="font-semibold text-white">Auto-complete Platinum</h3>
                     <p className="text-sm text-gray-400 mt-1">
                       Automatically mark Platinum trophy as earned when all other trophies are completed
                     </p>
