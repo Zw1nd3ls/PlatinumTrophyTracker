@@ -10,7 +10,9 @@
   },
   "scripts": {
     "start": "npm run build && serve -s public",
-    "build": "esbuild src/index.js --bundle --outfile=public/bundle.js --loader:.js=jsx --loader:.jsx=jsx"
+    "start:npx": "npm run build && npx serve -s public",
+    "build": "esbuild src/index.js --bundle --outfile=public/bundle.js --loader:.js=jsx --loader:.jsx=jsx",
+    "dev": "npm run build && serve -s public -l 3000"
   },
   "devDependencies": {
     "esbuild": "^0.25.8"
